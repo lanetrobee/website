@@ -1,9 +1,11 @@
+
 <head>
-	<title>Turtle Attack!</title>
+	<title>Mario.js</title>
 	<meta charset="UTF-8">
 </head>
 <body>
-<br>
+<h2>Lane Trobee Assignemnt 7 : mario.js</h2>
+
 <canvas id="myCanvas" width="1000" height="500" style="border:1px solid #cccccc;"></canvas>
 
 <script type="text/javascript">
@@ -18,6 +20,8 @@ class Sprite
 		this.image.src = image_url;
 		this.update = update_method;
 		this.onclick = onclick_method;
+		
+		//TODO: have a way to detect width and height
 	}
 
 	set_destination(x, y)
@@ -58,16 +62,17 @@ class Sprite
 
 
 
-
-
-
 class Model
 {
 	constructor()
 	{
 		this.sprites = [];
-		this.sprites.push(new Sprite(200, 100, "lettuce.png", Sprite.prototype.sit_still, Sprite.prototype.ignore_click));
-		this.turtle = new Sprite(50, 50, "turtle.png", Sprite.prototype.go_toward_destination, Sprite.prototype.set_destination);
+		this.sprites.push(new Sprite(200, 100, "lettuce.png", 
+						             Sprite.prototype.sit_still, 
+									 Sprite.prototype.ignore_click));
+		this.turtle = new Sprite(50, 50, "mario.png", 
+						         Sprite.prototype.go_toward_destination, 
+								 Sprite.prototype.set_destination);
 		this.sprites.push(this.turtle);
 	}
 
@@ -103,7 +108,7 @@ class View
 		this.model = model;
 		this.canvas = document.getElementById("myCanvas");
 		this.turtle = new Image();
-		this.turtle.src = "turtle.png";
+		this.turtle.src = "mario.png";
 	}
 
 	update()
@@ -173,10 +178,10 @@ class Controller
 	{
 		let dx = 0;
 		let dy = 0;
-		if(this.key_right) dx++;
-		if(this.key_left) dx--;
-		if(this.key_up) dy--;
-		if(this.key_down) dy++;
+		if(this.key_right) dx+=300;
+		if(this.key_left) dx-=300;
+		if(this.key_up) dy-=300;
+		if(this.key_down) dy+=300;
 		if(dx != 0 || dy != 0)
 			this.model.move(dx, dy);
 	}
@@ -205,9 +210,12 @@ class Game
 
 
 let game = new Game();
-let timer = setInterval(function() { game.onTimer(); }, 40);
+let timer = setInterval(function() { game.onTimer(); }, 17); // 16.666... ms is 60fps
 
+//let music = setInterval(function(){playsound();}, <howlong the sound file is>);
+
+//TODO: add settings to make the game run faster or slower
+//setInterval has multiple parameter that are usable to pass in
 </script>
 
 </body>
-
