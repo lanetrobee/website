@@ -1,15 +1,30 @@
-<!doctype html>
-
+<!DOCTYPE html>
+<html>
 <head>
 	<title>Mario.js</title>
 	<meta charset="UTF-8">
+	<style>
+	body  {background-color: gray;}
+	canvas{background-color: green;}
+	</style>
 </head>
-<body>
-<h2>Lane Trobee Assignemnt 7 : mario.js</h2>
+<body align=center>
+<h2 >Lane Trobee Assignemnt 7 : javascript</h2>
 
-<canvas id="myCanvas" width="1000" height="500" style="border:1px solid #cccccc;"></canvas>
+<canvas id="myCanvas" width="500" height="500" style="border:1px solid #cccccc;"></canvas>
 
 <script type="text/javascript">
+/*
+{"sprites":[
+{"type":"Mario","x":100,"y":200,"w":60,"h":95,"vert_vel":20.399999999999995,"horz_vel":0.0,"coinCounter":0},
+{"type":"Brick","x":44,"y":400,"w":381,"h":40,"vert_vel":0.0,"horz_vel":0.0,"coinCounter":0},
+{"type":"CoinBlock","x":237,"y":102,"w":89,"h":83,"vert_vel":0.0,"horz_vel":0.0,"coinCounter":0},
+{"type":"CoinBlock","x":480,"y":350,"w":89,"h":83,"vert_vel":0.0,"horz_vel":0.0,"coinCounter":0},
+{"type":"CoinBlock","x":600,"y":350,"w":89,"h":83,"vert_vel":0.0,"horz_vel":0.0,"coinCounter":0},
+{"type":"CoinBlock","x":700,"y":345,"w":89,"h":83,"vert_vel":0.0,"horz_vel":0.0,"coinCounter":0},
+{"type":"CoinBlock","x":700,"y":102,"w":89,"h":83,"vert_vel":0.0,"horz_vel":0.0,"coinCounter":0}]}
+*/
+
 
 class Sprite
 {
@@ -17,6 +32,7 @@ class Sprite
 	{
 		this.x = x;
 		this.y = y;
+		this.test = 250;
 		this.image = new Image();
 		this.image.src = image_url;
 		this.update = update_method;
@@ -61,6 +77,16 @@ class Sprite
 	}
 }
 
+class Mario extends Sprite
+{
+	constructor(x, y, image_url, update_method, onclick_method)
+	{
+		super(x, y, image_url, update_method, onclick_method)
+		//window.alert(test);
+	}
+	
+	
+}
 
 
 class Model
@@ -71,7 +97,7 @@ class Model
 		this.sprites.push(new Sprite(200, 100, "lettuce.png", 
 						             Sprite.prototype.sit_still, 
 									 Sprite.prototype.ignore_click));
-		this.turtle = new Sprite(50, 50, "mario.png", 
+		this.turtle = new Mario(50, 50, "mario.png", 
 						         Sprite.prototype.go_toward_destination, 
 								 Sprite.prototype.set_destination);
 		this.sprites.push(this.turtle);
@@ -151,16 +177,10 @@ class Controller
 		this.model.onclick(event.pageX - this.view.canvas.offsetLeft, event.pageY - this.view.canvas.offsetTop);
 	}
 
-	keyDown(event)
-	{
-		if(event.keyCode == 39) this.key_right = true;
-		else if(event.keyCode == 37) this.key_left = true;
-		else if(event.keyCode == 38) this.key_up = true;
-		else if(event.keyCode == 40) this.key_down = true;
-	}
 
 	keyDown(event)
 	{
+		//general movement
 		if(event.keyCode == 39) this.key_right = true;
 		else if(event.keyCode == 37) this.key_left = true;
 		else if(event.keyCode == 38) this.key_up = true;
@@ -169,6 +189,7 @@ class Controller
 
 	keyUp(event)
 	{
+		//general movement
 		if(event.keyCode == 39) this.key_right = false;
 		else if(event.keyCode == 37) this.key_left = false;
 		else if(event.keyCode == 38) this.key_up = false;
@@ -179,10 +200,10 @@ class Controller
 	{
 		let dx = 0;
 		let dy = 0;
-		if(this.key_right) dx+=300;
-		if(this.key_left) dx-=300;
-		if(this.key_up) dy-=300;
-		if(this.key_down) dy+=300;
+		if(this.key_right) dx++;
+		if(this.key_left) dx--;
+		if(this.key_up) dy--;
+		if(this.key_down) dy++;
 		if(dx != 0 || dy != 0)
 			this.model.move(dx, dy);
 	}
@@ -211,7 +232,7 @@ class Game
 
 
 let game = new Game();
-let timer = setInterval(function() { game.onTimer(); }, 17); // 16.666... ms is 60fps
+let timer = setInterval(function() { game.onTimer(); }, 16); // 16.666... ms is 60fps
 
 //let music = setInterval(function(){playsound();}, <howlong the sound file is>);
 
