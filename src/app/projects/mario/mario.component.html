@@ -3,29 +3,14 @@
 <head>
 	<title>Mario.js</title>
 	<meta charset="UTF-8">
-	<style>
-	body  {background-color: gray;}
-	canvas{background-color: green;}
-	</style>
 </head>
+
 <body align=center>
 <h2 >Lane Trobee Assignment 7 : javascript</h2>
 
 <canvas id="myCanvas" width="500" height="500" style="border:1px solid #cccccc;"></canvas>
 
 <script type="text/javascript">
-/*
-{"sprites":[
-{"type":"Mario","x":100,"y":200,"w":60,"h":95,"vert_vel":20.399999999999995,"horz_vel":0.0,"coinCounter":0},
-{"type":"Brick","x":44,"y":400,"w":381,"h":40,"vert_vel":0.0,"horz_vel":0.0,"coinCounter":0},
-{"type":"CoinBlock","x":237,"y":102,"w":89,"h":83,"vert_vel":0.0,"horz_vel":0.0,"coinCounter":0},
-{"type":"CoinBlock","x":480,"y":350,"w":89,"h":83,"vert_vel":0.0,"horz_vel":0.0,"coinCounter":0},
-{"type":"CoinBlock","x":600,"y":350,"w":89,"h":83,"vert_vel":0.0,"horz_vel":0.0,"coinCounter":0},
-{"type":"CoinBlock","x":700,"y":345,"w":89,"h":83,"vert_vel":0.0,"horz_vel":0.0,"coinCounter":0},
-{"type":"CoinBlock","x":700,"y":102,"w":89,"h":83,"vert_vel":0.0,"horz_vel":0.0,"coinCounter":0}]}
-*/
-
-
 class Sprite
 {
 	constructor(x, y, w, h, image_url, update_method, type, mod)
@@ -95,7 +80,7 @@ class Sprite
 			}
 			a.knock = false;
 		}
-		
+
 	}
 }
 
@@ -103,12 +88,12 @@ class Mario extends Sprite
 {
 	constructor(x, y, model)
 	{
-		super(x, y, 60, 95, "mario1.png", Mario.prototype.update, "mario",model);
-		this.mario_images = ["mario1.png", "mario2.png", "mario3.png", "mario4.png", "mario5.png"]
+		super(x, y, 60, 95, "../../../assets/mario/mario1.png", Mario.prototype.update, "mario",model);
+		this.mario_images = ["../../../assets/mario/mario1.png", "../../../assets/mario/mario2.png", "../../../assets/mario/mario3.png", "../../../assets/mario/mario4.png", "../../../assets/mario/mario5.png"]
 		this.jumpcounter = 0;
 		this.onObject = 0;
 	}
-	
+
 	update()
 	{
 		//window.alert(this.type);
@@ -118,15 +103,15 @@ class Mario extends Sprite
 		switch(select % 5)
 		{
 			case 0:
-				this.image.src = "mario1.png"; break;
+				this.image.src = "../../../assets/mario/mario1.png"; break;
 			case 1:
-				this.image.src = "mario2.png"; break;
+				this.image.src = "../../../assets/mario/mario2.png"; break;
 			case 2:
-				this.image.src = "mario3.png"; break;
+				this.image.src = "../../../assets/mario/mario3.png"; break;
 			case 3:
-				this.image.src = "mario4.png"; break;
+				this.image.src = "../../../assets/mario/mario4.png"; break;
 			case 4:
-				this.image.src = "mario5.png"; break;
+				this.image.src = "../../../assets/mario/mario5.png"; break;
 		}
 		//gravity
 		if (this.onObject == 1)
@@ -166,7 +151,7 @@ class Brick extends Sprite
 {
 	constructor(x,y,w,h,model)
 	{
-		super(x,y,w,h,"brick.png",Brick.prototype.update,"brick",model);
+		super(x,y,w,h,"../../../assets/mario/brick.png",Brick.prototype.update,"brick",model);
 	}
 	update()
 	{
@@ -178,16 +163,16 @@ class CoinBlock extends Sprite
 {
 	constructor(x, y,model)
 	{
-		super(x, y, 89, 83, "block1.png", CoinBlock.prototype.update, "coinblock",model);
+		super(x, y, 89, 83, "../../../assets/mario/block1.png", CoinBlock.prototype.update, "coinblock",model);
 		//window.alert(this.x + this.y);
 	}
-	
+
 	update()
 	{
 		if(this.coinCounter < 5)
-        	this.image.src = "block1.png";
+        	this.image.src = "../../../assets/mario/block1.png";
         else if(this.coinCounter >= 5)
-        	this.image.src = "block2.png";
+        	this.image.src = "../../../assets/mario/block2.png";
 	}
 }
 
@@ -195,13 +180,13 @@ class Coin extends Sprite
 {
 	constructor(x, y, model)
 	{
-		super(x, y, 75, 75, "coin.png", Coin.prototype.update, "coin",model);
+		super(x, y, 75, 75, "../../../assets/mario/coin.png", Coin.prototype.update, "coin",model);
 		//window.alert(this.x + this.y);
 		//Math.floor(Math.random() * (max - min + 1) ) + min;
 		this.vert_vel = Math.floor(Math.random() * (-5 + 10) ) - 5;
 		this.horz_vel = Math.floor(Math.random() * (8 + 8) - 8);
 	}
-	
+
 	update()
 	{
 		if(this.y >= 1500)
@@ -214,7 +199,7 @@ class Coin extends Sprite
 
         this.y += this.vert_vel;
         this.x += this.horz_vel;
-        
+
 	}
 }
 
