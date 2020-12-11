@@ -13,10 +13,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-<<<<<<< HEAD
     "install:clean": "rm -rf node_modules/ && rm -rf package-lock.json && npm install && npm start",
-=======
->>>>>>> 4e75f483686d30c862cb9c050f37098efc825c29
     "deploy": "ng build --prod"
   },
   "dependencies": {
