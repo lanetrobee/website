@@ -19,10 +19,6 @@ import { ExamplesModule } from './examples/examples.module';
     NavbarComponent,
     FooterComponent
   ],
-  imports: [
-    BrowserModule,
-    NgbModule,
-    FormsModule,
     RouterModule,
     ComponentsModule,
     ExamplesModule,
